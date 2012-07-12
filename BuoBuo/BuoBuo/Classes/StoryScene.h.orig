@@ -15,10 +15,14 @@
 
 USING_NS_CC;
 
+<<<<<<< HEAD
 class StoryScene : public cocos2d::CCLayer {
 protected:
     CCSprite* buobuo;
     CCSprite* enemy1;
+=======
+class StoryScene : public cocos2d::CCLayer {	
+>>>>>>> 53f2516699d980542a3a03e6f1af726b94887cf3
 public:
     ~StoryScene();
     StoryScene();
@@ -29,6 +33,7 @@ public:
     
 	b2World *world;
 	int timeout;
+	bool isGameOver;
     
     // returns a Scene that contains the MainScene as the only child
     static cocos2d::CCScene* scene();
@@ -50,16 +55,19 @@ public:
 	
 	// CCAccelerometerDelegate method
 	virtual void didAccelerate(cocos2d::CCAcceleration *pAcceleration);
+<<<<<<< HEAD
     
     void destroyEnemy(CCSprite *enemy);
     void gameOver();
     void buobuoDied();
     void addEnemy();
+=======
 	
 	// CCScene delegate
 	virtual void onEnter();
 	virtual void onExit();
     virtual void onEnterTransitionDidFinish();
+>>>>>>> 53f2516699d980542a3a03e6f1af726b94887cf3
 };
 
 #endif // BuoBuo_StoryScene_h

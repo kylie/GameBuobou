@@ -16,7 +16,8 @@ using namespace cocos2d;
 using namespace CocosDenshion;
 
 #define PTM_RATIO 32
-#define BUOBUO_POSITION_X 150
+<<<<<<< HEAD
+#define BUOBUO_POSITION_X 100
 
 enum {
     kTagSpriteBuo = 0,
@@ -24,17 +25,51 @@ enum {
     kTagSpriteEnemy2 = 2,
     kTagSpriteEnemy3 = 3
 };
+
+StoryScene::StoryScene()
+{
+    time = 0;
+    setIsTouchEnabled(true);
+=======
 #define BG_WAVE 199
 #define BG_SKY 200
 #define UI_TIMEOUT 201
 
 StoryScene::StoryScene()
 {
-    time = 0;
-    setIsTouchEnabled(true);
+	setIsTouchEnabled(true);
+>>>>>>> 53f2516699d980542a3a03e6f1af726b94887cf3
     setIsAccelerometerEnabled(true);
 
+<<<<<<< HEAD
+	CCSize winsize = CCDirector::sharedDirector()->getWinSize();
+	
+	// background wave
+	CCSprite *backgroundWave = CCSprite::spriteWithFile("backgroundWave.png");
+	backgroundWave->setPosition(CCPoint(winsize.width / 2, winsize.height / 2));
+	addChild(backgroundWave);
+	
+	// create main character
+	buobuo = CCSprite::spriteWithFile("buobuo_R.png");
+	buobuo->setPosition(CCPoint(BUOBUO_POSITION_X, winsize.height / 2));
+    buobuo->setTag(kTagSpriteBuo);
+	addChild(buobuo);
+//	buobuo->retain();
+    
+	// menu item
+    CCMenuItemImage* item = CCMenuItemImage::itemFromNormalImage("back.png", "back.png", this, menu_selector(StoryScene::menuCallbackMain));
+    CCMenu* menu = CCMenu::menuWithItem(item);
+    menu->setPosition(ccp(30, 300));
+    addChild(menu);
+    
+	// title label
+    CCLabelTTF *label = CCLabelTTF::labelWithString("BuoBuo game demo", "Marker Felt", 32);
+	addChild(label, 0);
+	label->setColor( ccc3(0,0,255) );
+	label->setPosition( CCPointMake( winsize.width/2, winsize.height-50) );
+=======
 	timeout = 120; // play time : 2 min
+>>>>>>> 53f2516699d980542a3a03e6f1af726b94887cf3
 	
 	// create physics world
 	createPhysicsWorld();
@@ -121,8 +156,7 @@ bool StoryScene::createChracterObjects()
 	
 	// create main character
 	CCSprite *buobuo = CCSprite::spriteWithFile("buobuo_R.png");
-	buobuo->setPosition(CCPoint(BUOBUO_POSITION_X, winsize.height / 2));
-    buobuo->setTag(kTagSpriteBuo);
+	buobuo->setPosition(CCPoint(150, winsize.height / 2));
 	addChild(buobuo);
 	
 	// add physics body to sprite
@@ -249,9 +283,14 @@ bool StoryScene::addPhysicsBodyToSprite(cocos2d::CCSprite *sprite)
 	
 	b2FixtureDef nodeShapeDef;
 	nodeShapeDef.shape = &polygonShape;
-	nodeShapeDef.density = 0.0f;
+<<<<<<< HEAD
+	nodeShapeDef.density = 5.0f;
 	nodeShapeDef.friction = 0.3f;
-	nodeShapeDef.restitution = 0.3f;
+=======
+	nodeShapeDef.density = 0.0f;
+	nodeShapeDef.friction = 1.0f;
+>>>>>>> 53f2516699d980542a3a03e6f1af726b94887cf3
+	nodeShapeDef.restitution = 0.0f;
 	
 	b2Body *body = world->CreateBody(&nodeBodyDef);
 	body->CreateFixture(&nodeShapeDef);
@@ -364,10 +403,11 @@ void StoryScene::tick(cocos2d::ccTime dt)
 
 void StoryScene::didAccelerate(cocos2d::CCAcceleration *pAcceleration)
 {
-	cout<<"called didAccelerate-------------------------"<<endl;
-	cout<<"Acceleration X : "<<pAcceleration->x * 10.f<<endl;
-	cout<<"Acceleration Y : "<<pAcceleration->y * 10.f<<endl;
-	cout<<"Acceleration Z : "<<pAcceleration->z * 10.f<<endl;
+<<<<<<< HEAD
+//	cout<<"called didAccelerate-------------------------"<<endl;
+//	cout<<"Acceleration X : "<<pAcceleration->x * 10.f<<endl;
+//	cout<<"Acceleration Y : "<<pAcceleration->y * 10.f<<endl;
+//	cout<<"Acceleration Z : "<<pAcceleration->z * 10.f<<endl;
 	
     if ( buobuo == NULL ) {
         return;
@@ -495,4 +535,13 @@ void StoryScene::addEnemy()
    
     
     cout<<"Enemy++++++++++++++++++++++++++++"<<endl;
+=======
+	cout<<"called didAccelerate-------------------------"<<endl;
+	cout<<"Acceleration X : "<<pAcceleration->x * 10.f<<endl;
+	cout<<"Acceleration Y : "<<pAcceleration->y * 10.f<<endl;
+	cout<<"Acceleration Z : "<<pAcceleration->z * 10.f<<endl;
+    
+	b2Vec2 gravity(0.f, pAcceleration->y * 30.f);
+	world->SetGravity(gravity);
+>>>>>>> 53f2516699d980542a3a03e6f1af726b94887cf3
 }
