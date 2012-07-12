@@ -17,11 +17,19 @@ class StoryScene : public cocos2d::CCLayer {
 public:
     ~StoryScene();
     StoryScene();
+	
+	b2World *world;
     
     // returns a Scene that contains the MainScene as the only child
     static cocos2d::CCScene* scene();
     
+	bool createPhysicsWorld();
+	bool addPhysicsBodyToSprite(cocos2d::CCSprite *sprite);
+	void tick(cocos2d::ccTime dt);
     void menuCallbackMain(CCObject* sender);
+	
+	// CCAccelerometerDelegate method
+	virtual void didAccelerate(cocos2d::CCAcceleration *pAcceleration);
 };
 
 #endif // BuoBuo_StoryScene_h

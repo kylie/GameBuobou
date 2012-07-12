@@ -24,11 +24,6 @@ MainScene::MainScene()
 	CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
 	//UXLOG(L"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
     
-	// Define the gravity vector.
-	b2Vec2 gravity;
-	gravity.Set(0.0f, -10.0f);
-	
-	
 	//Set up sprite  
     CCSprite *sprite = CCSprite::spriteWithFile("main.png");
     sprite->setPosition(CCPoint(screenSize.width/2, screenSize.height/2));
