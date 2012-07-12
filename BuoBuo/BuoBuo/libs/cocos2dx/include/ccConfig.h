@@ -240,7 +240,7 @@ Platforms: Only used on Retina Display devices like iPhone 4.
 @since v0.99.5
 */ 
 #ifndef CC_RETINA_DISPLAY_FILENAME_SUFFIX
-#define CC_RETINA_DISPLAY_FILENAME_SUFFIX "-hd"
+#define CC_RETINA_DISPLAY_FILENAME_SUFFIX "@2x"
 #endif
 
 /** @def CC_USE_LA88_LABELS_ON_NEON_ARCH

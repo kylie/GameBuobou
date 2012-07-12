@@ -31,13 +31,14 @@ MainScene::MainScene()
 	
 	//Set up sprite  
     CCSprite *sprite = CCSprite::spriteWithFile("main.png");
-    sprite->setPosition(CCPoint(screenSize.width/2, screenSize.height/2));
+    sprite->setPosition(CCPoint(round(screenSize.width/2), round(screenSize.height/2)));
+
     addChild(sprite);
     
     //Set up menu
     //(const char *normalImage, const char *selectedImage, CCObject* target, SEL_MenuHandler selector)
     CCMenuItemImage* item1 = CCMenuItemImage::itemFromNormalImage("main_menu_story.png", "main_menu_story.png", this, menu_selector(MainScene::menuCallbackStory));
-    CCMenuItemImage* item2 = CCMenuItemImage::itemFromNormalImage("main_menu_play.png", "main_menu_story.png", this, menu_selector(MainScene::menuCallbackPlay) );
+    CCMenuItemImage* item2 = CCMenuItemImage::itemFromNormalImage("main_menu_play.png", "main_menu_play.png", this, menu_selector(MainScene::menuCallbackPlay) );
 
     
     CCMenu* menu = CCMenu::menuWithItems(item1, item2, NULL);
