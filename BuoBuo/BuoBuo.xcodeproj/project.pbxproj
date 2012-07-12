@@ -186,6 +186,12 @@
 		618DFFFA15AE9A08007CCE11 /* CCIMEDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFF915AE9A08007CCE11 /* CCIMEDispatcher.cpp */; };
 		618DFFFC15AE9A08007CCE11 /* CCTextFieldTTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFFB15AE9A08007CCE11 /* CCTextFieldTTF.cpp */; };
 		618DFFFF15AE9A08007CCE11 /* CCTexture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFFE15AE9A08007CCE11 /* CCTexture2D.cpp */; };
+		F4252D8615AEA2040001E348 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = F4252D8415AEA2040001E348 /* main.png */; };
+		F4252D8715AEA2040001E348 /* main@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4252D8515AEA2040001E348 /* main@2x.png */; };
+		F4252D8C15AEA22D0001E348 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4252D8A15AEA2290001E348 /* MainScene.cpp */; };
+		F4252D8D15AEA2300001E348 /* StoryScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4252D8815AEA2240001E348 /* StoryScene.cpp */; };
+		F4252D9415AEA7F60001E348 /* main_menu_play.png in Resources */ = {isa = PBXBuildFile; fileRef = F4252D9215AEA7F60001E348 /* main_menu_play.png */; };
+		F4252D9515AEA7F60001E348 /* main_menu_story.png in Resources */ = {isa = PBXBuildFile; fileRef = F4252D9315AEA7F60001E348 /* main_menu_story.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -559,6 +565,14 @@
 		618DFFF915AE9A08007CCE11 /* CCIMEDispatcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCIMEDispatcher.cpp; path = libs/cocos2dx/text_input_node/CCIMEDispatcher.cpp; sourceTree = "<group>"; };
 		618DFFFB15AE9A08007CCE11 /* CCTextFieldTTF.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCTextFieldTTF.cpp; path = libs/cocos2dx/text_input_node/CCTextFieldTTF.cpp; sourceTree = "<group>"; };
 		618DFFFE15AE9A08007CCE11 /* CCTexture2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCTexture2D.cpp; path = libs/cocos2dx/textures/CCTexture2D.cpp; sourceTree = "<group>"; };
+		F4252D8415AEA2040001E348 /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main.png; path = Resources/main.png; sourceTree = "<group>"; };
+		F4252D8515AEA2040001E348 /* main@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "main@2x.png"; path = "Resources/main@2x.png"; sourceTree = "<group>"; };
+		F4252D8815AEA2240001E348 /* StoryScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = StoryScene.cpp; path = Classes/StoryScene.cpp; sourceTree = "<group>"; };
+		F4252D8915AEA2240001E348 /* StoryScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StoryScene.h; path = Classes/StoryScene.h; sourceTree = "<group>"; };
+		F4252D8A15AEA2290001E348 /* MainScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = Classes/MainScene.cpp; sourceTree = "<group>"; };
+		F4252D8B15AEA2290001E348 /* MainScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = Classes/MainScene.h; sourceTree = "<group>"; };
+		F4252D9215AEA7F60001E348 /* main_menu_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_menu_play.png; path = Resources/main_menu_play.png; sourceTree = "<group>"; };
+		F4252D9315AEA7F60001E348 /* main_menu_story.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_menu_story.png; path = Resources/main_menu_story.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -814,6 +828,8 @@
 		618D00C715AE9A09007CCE11 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F4252D7815AE9F550001E348 /* Game */,
+				F4252D7715AE9F4B0001E348 /* Main */,
 				618D00C815AE9A09007CCE11 /* AppDelegate.h */,
 				618D00C915AE9A09007CCE11 /* AppDelegate.cpp */,
 				618D00CB15AE9A09007CCE11 /* HelloWorldScene.h */,
@@ -869,6 +885,8 @@
 		618DFE9215AE9A07007CCE11 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F4252D7915AE9F860001E348 /* Game */,
+				F4252D7515AE9F2C0001E348 /* Main */,
 				618DFE9315AE9A07007CCE11 /* CloseNormal.png */,
 				618DFE9515AE9A07007CCE11 /* CloseSelected.png */,
 				618DFE9715AE9A07007CCE11 /* Default.png */,
@@ -1316,6 +1334,42 @@
 			name = textures;
 			sourceTree = "<group>";
 		};
+		F4252D7515AE9F2C0001E348 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F4252D9215AEA7F60001E348 /* main_menu_play.png */,
+				F4252D9315AEA7F60001E348 /* main_menu_story.png */,
+				F4252D8415AEA2040001E348 /* main.png */,
+				F4252D8515AEA2040001E348 /* main@2x.png */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		F4252D7715AE9F4B0001E348 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F4252D8A15AEA2290001E348 /* MainScene.cpp */,
+				F4252D8B15AEA2290001E348 /* MainScene.h */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		F4252D7815AE9F550001E348 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				F4252D8815AEA2240001E348 /* StoryScene.cpp */,
+				F4252D8915AEA2240001E348 /* StoryScene.h */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		F4252D7915AE9F860001E348 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1379,6 +1433,10 @@
 				618DFEA615AE9A07007CCE11 /* Icon@2x.png in Resources */,
 				618DFEA915AE9A07007CCE11 /* iTunesArtwork in Resources */,
 				618D00CF15AE9A09007CCE11 /* blocks.png in Resources */,
+				F4252D8615AEA2040001E348 /* main.png in Resources */,
+				F4252D8715AEA2040001E348 /* main@2x.png in Resources */,
+				F4252D9415AEA7F60001E348 /* main_menu_play.png in Resources */,
+				F4252D9515AEA7F60001E348 /* main_menu_story.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1548,6 +1606,8 @@
 				618D00C615AE9A09007CCE11 /* RootViewController.mm in Sources */,
 				618D00CA15AE9A09007CCE11 /* AppDelegate.cpp in Sources */,
 				618D00CD15AE9A09007CCE11 /* HelloWorldScene.cpp in Sources */,
+				F4252D8C15AEA22D0001E348 /* MainScene.cpp in Sources */,
+				F4252D8D15AEA2300001E348 /* StoryScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1714,7 @@
 				618D00D415AE9A09007CCE11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		618DFE7715AE9A06007CCE11 /* Build configuration list for PBXProject "BuoBuo" */ = {
 			isa = XCConfigurationList;

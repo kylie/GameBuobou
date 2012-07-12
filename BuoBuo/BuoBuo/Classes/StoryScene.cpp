@@ -1,5 +1,5 @@
 //
-//  GameScene.cpp
+//  StoryScene.cpp
 //  BuoBuo
 //
 //  Created by JihyunChoi on 7/12/12.
@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "GameScene.h"
+#include "StoryScene.h"
 #include "SimpleAudioEngine.h"
 
 using namespace cocos2d;
@@ -15,7 +15,7 @@ using namespace CocosDenshion;
 
 #define PTM_RATIO 32
 
-GameScene::GameScene()
+StoryScene::StoryScene()
 {
     CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
     
@@ -26,25 +26,25 @@ GameScene::GameScene()
 	label->setPosition( CCPointMake( screenSize.width/2, screenSize.height-50) );
 }
 
-GameScene::~GameScene()
+StoryScene::~StoryScene()
 {
     
 }
 
-CCScene* GameScene::scene()
+CCScene* StoryScene::scene()
 {
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::node();
     
     // add layer as a child to scene
-    CCLayer* layer = new GameScene();
+    CCLayer* layer = new StoryScene();
     scene->addChild(layer);
     layer->release();
     
     return scene;
 }
 
-void GameScene::menuCallbackMain(CCObject* sender)
+void StoryScene::menuCallbackMain(CCObject* sender)
 {
     
 }
