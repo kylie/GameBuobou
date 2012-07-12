@@ -26,12 +26,19 @@ StoryScene::StoryScene()
 	
 	// background wave
 	CCSprite *backgroundWave = CCSprite::spriteWithFile("backgroundWave.png");
-	backgroundWave->setPosition(CCPoint(winsize.width / 2, winsize.height / 2));
-	addChild(backgroundWave);
+	CCParallaxNode *parallaxNode = CCParallaxNode::node();
+	parallaxNode->addChild(backgroundWave, 0, ccp(1.0f, 0), CCPoint(winsize.width / 2, winsize.height / 2));
+	addChild(parallaxNode, 0);
+	
+	float duration = 10.f;
+	float xRatio = 1.f;
+	
+	CCAction *moveAction = CCMoveBy::actionWithDuration(duration, ccp( -1 * winsize.width / xRatio, 0));
+	parallaxNode->runAction(moveAction);
 	
 	// create main character
 	CCSprite *buobuo = CCSprite::spriteWithFile("buobuo_R.png");
-	buobuo->setPosition(CCPoint(100, winsize.height / 2));
+	buobuo->setPosition(CCPoint(150, winsize.height / 2));
 	addChild(buobuo);
 	
 	// menu item
@@ -125,7 +132,6 @@ bool StoryScene::createPhysicsWorld()
 
 bool StoryScene::addPhysicsBodyToSprite(cocos2d::CCSprite *sprite)
 {
-	
 	//
 	b2BodyDef nodeBodyDef;
 	nodeBodyDef.type = b2_dynamicBody;

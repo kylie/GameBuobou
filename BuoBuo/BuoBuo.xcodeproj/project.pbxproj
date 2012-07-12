@@ -186,8 +186,6 @@
 		618DFFFA15AE9A08007CCE11 /* CCIMEDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFF915AE9A08007CCE11 /* CCIMEDispatcher.cpp */; };
 		618DFFFC15AE9A08007CCE11 /* CCTextFieldTTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFFB15AE9A08007CCE11 /* CCTextFieldTTF.cpp */; };
 		618DFFFF15AE9A08007CCE11 /* CCTexture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFFE15AE9A08007CCE11 /* CCTexture2D.cpp */; };
-		61C0E99315AEA71600501864 /* BackgroundWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0E99215AEA71600501864 /* BackgroundWave.cpp */; };
-		61C0E99515AEADB200501864 /* FirstStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0E99415AEADB200501864 /* FirstStage.cpp */; };
 		61C0E99915AEAF7D00501864 /* backgroundWave@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C0E99815AEAF7D00501864 /* backgroundWave@2x.png */; };
 		61C0E9A815AEBD6300501864 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C0E9A315AEBD6300501864 /* back.png */; };
 		61C0E9B215AEBDA000501864 /* main_menu_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C0E9AE15AEBDA000501864 /* main_menu_play.png */; };
@@ -572,10 +570,6 @@
 		618DFFF915AE9A08007CCE11 /* CCIMEDispatcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCIMEDispatcher.cpp; path = libs/cocos2dx/text_input_node/CCIMEDispatcher.cpp; sourceTree = "<group>"; };
 		618DFFFB15AE9A08007CCE11 /* CCTextFieldTTF.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCTextFieldTTF.cpp; path = libs/cocos2dx/text_input_node/CCTextFieldTTF.cpp; sourceTree = "<group>"; };
 		618DFFFE15AE9A08007CCE11 /* CCTexture2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCTexture2D.cpp; path = libs/cocos2dx/textures/CCTexture2D.cpp; sourceTree = "<group>"; };
-		61C0E98F15AEA6F200501864 /* BackgroundWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackgroundWave.h; path = Classes/BackgroundWave.h; sourceTree = "<group>"; };
-		61C0E99215AEA71600501864 /* BackgroundWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BackgroundWave.cpp; path = Classes/BackgroundWave.cpp; sourceTree = "<group>"; };
-		61C0E99415AEADB200501864 /* FirstStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FirstStage.cpp; path = Classes/FirstStage.cpp; sourceTree = "<group>"; };
-		61C0E99615AEADC600501864 /* FirstStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirstStage.h; path = Classes/FirstStage.h; sourceTree = "<group>"; };
 		61C0E99815AEAF7D00501864 /* backgroundWave@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundWave@2x.png"; sourceTree = "<group>"; };
 		61C0E9A315AEBD6300501864 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		61C0E9AE15AEBDA000501864 /* main_menu_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_menu_play.png; sourceTree = "<group>"; };
@@ -1387,10 +1381,6 @@
 		F4252D7815AE9F550001E348 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				61C0E99615AEADC600501864 /* FirstStage.h */,
-				61C0E99415AEADB200501864 /* FirstStage.cpp */,
-				61C0E98F15AEA6F200501864 /* BackgroundWave.h */,
-				61C0E99215AEA71600501864 /* BackgroundWave.cpp */,
 				F4252D8815AEA2240001E348 /* StoryScene.cpp */,
 				F4252D8915AEA2240001E348 /* StoryScene.h */,
 			);
@@ -1638,8 +1628,6 @@
 				618D00C615AE9A09007CCE11 /* RootViewController.mm in Sources */,
 				618D00CA15AE9A09007CCE11 /* AppDelegate.cpp in Sources */,
 				618D00CD15AE9A09007CCE11 /* HelloWorldScene.cpp in Sources */,
-				61C0E99315AEA71600501864 /* BackgroundWave.cpp in Sources */,
-				61C0E99515AEADB200501864 /* FirstStage.cpp in Sources */,
 				F4252D8C15AEA22D0001E348 /* MainScene.cpp in Sources */,
 				F4252D8D15AEA2300001E348 /* StoryScene.cpp in Sources */,
 			);
@@ -1714,7 +1702,7 @@
 				GCC_PREFIX_HEADER = BuoBuo/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = BuoBuo/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-lz",
@@ -1722,6 +1710,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"BuoBuo/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1738,7 +1727,7 @@
 				GCC_PREFIX_HEADER = BuoBuo/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = BuoBuo/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-lz",
@@ -1746,6 +1735,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E37E3170-98B2-4E4C-821E-DED400518787";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E37E3170-98B2-4E4C-821E-DED400518787";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"BuoBuo/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
