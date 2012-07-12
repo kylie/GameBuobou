@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "StoryScene.h"
+#include "MainScene.h"
 #include "SimpleAudioEngine.h"
 
 using namespace cocos2d;
@@ -19,6 +20,16 @@ StoryScene::StoryScene()
 {
     CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
     
+    
+    CCMenuItemImage* item = CCMenuItemImage::itemFromNormalImage("back.png", "back.png", this, menu_selector(StoryScene::menuCallbackMain));
+    
+    
+    CCMenu* menu = CCMenu::menuWithItem(item);
+    menu->setPosition(ccp(30, 300));
+    
+    
+    addChild(menu);
+
     
     CCLabelTTF *label = CCLabelTTF::labelWithString("BuoBuo game demo", "Marker Felt", 32);
 	addChild(label, 0);
@@ -46,5 +57,7 @@ CCScene* StoryScene::scene()
 
 void StoryScene::menuCallbackMain(CCObject* sender)
 {
-    
+    CCDirector *pDirector = CCDirector::sharedDirector();
+    CCScene *pScene = MainScene::scene();
+	pDirector->replaceScene(pScene);
 }
