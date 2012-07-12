@@ -186,6 +186,9 @@
 		618DFFFA15AE9A08007CCE11 /* CCIMEDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFF915AE9A08007CCE11 /* CCIMEDispatcher.cpp */; };
 		618DFFFC15AE9A08007CCE11 /* CCTextFieldTTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFFB15AE9A08007CCE11 /* CCTextFieldTTF.cpp */; };
 		618DFFFF15AE9A08007CCE11 /* CCTexture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618DFFFE15AE9A08007CCE11 /* CCTexture2D.cpp */; };
+		61C0E99315AEA71600501864 /* BackgroundWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0E99215AEA71600501864 /* BackgroundWave.cpp */; };
+		61C0E99515AEADB200501864 /* FirstStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0E99415AEADB200501864 /* FirstStage.cpp */; };
+		61C0E99915AEAF7D00501864 /* backgroundWave.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C0E99815AEAF7D00501864 /* backgroundWave.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -559,6 +562,11 @@
 		618DFFF915AE9A08007CCE11 /* CCIMEDispatcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCIMEDispatcher.cpp; path = libs/cocos2dx/text_input_node/CCIMEDispatcher.cpp; sourceTree = "<group>"; };
 		618DFFFB15AE9A08007CCE11 /* CCTextFieldTTF.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCTextFieldTTF.cpp; path = libs/cocos2dx/text_input_node/CCTextFieldTTF.cpp; sourceTree = "<group>"; };
 		618DFFFE15AE9A08007CCE11 /* CCTexture2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CCTexture2D.cpp; path = libs/cocos2dx/textures/CCTexture2D.cpp; sourceTree = "<group>"; };
+		61C0E98F15AEA6F200501864 /* BackgroundWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackgroundWave.h; path = Classes/BackgroundWave.h; sourceTree = "<group>"; };
+		61C0E99215AEA71600501864 /* BackgroundWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BackgroundWave.cpp; path = Classes/BackgroundWave.cpp; sourceTree = "<group>"; };
+		61C0E99415AEADB200501864 /* FirstStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FirstStage.cpp; path = Classes/FirstStage.cpp; sourceTree = "<group>"; };
+		61C0E99615AEADC600501864 /* FirstStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirstStage.h; path = Classes/FirstStage.h; sourceTree = "<group>"; };
+		61C0E99815AEAF7D00501864 /* backgroundWave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundWave.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -814,10 +822,14 @@
 		618D00C715AE9A09007CCE11 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				61C0E98F15AEA6F200501864 /* BackgroundWave.h */,
+				61C0E99215AEA71600501864 /* BackgroundWave.cpp */,
 				618D00C815AE9A09007CCE11 /* AppDelegate.h */,
 				618D00C915AE9A09007CCE11 /* AppDelegate.cpp */,
 				618D00CB15AE9A09007CCE11 /* HelloWorldScene.h */,
 				618D00CC15AE9A09007CCE11 /* HelloWorldScene.cpp */,
+				61C0E99615AEADC600501864 /* FirstStage.h */,
+				61C0E99415AEADB200501864 /* FirstStage.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -869,6 +881,7 @@
 		618DFE9215AE9A07007CCE11 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				61C0E99715AEAF7D00501864 /* GameResources */,
 				618DFE9315AE9A07007CCE11 /* CloseNormal.png */,
 				618DFE9515AE9A07007CCE11 /* CloseSelected.png */,
 				618DFE9715AE9A07007CCE11 /* Default.png */,
@@ -1316,6 +1329,15 @@
 			name = textures;
 			sourceTree = "<group>";
 		};
+		61C0E99715AEAF7D00501864 /* GameResources */ = {
+			isa = PBXGroup;
+			children = (
+				61C0E99815AEAF7D00501864 /* backgroundWave.png */,
+			);
+			name = GameResources;
+			path = Resources/GameResources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1379,6 +1401,7 @@
 				618DFEA615AE9A07007CCE11 /* Icon@2x.png in Resources */,
 				618DFEA915AE9A07007CCE11 /* iTunesArtwork in Resources */,
 				618D00CF15AE9A09007CCE11 /* blocks.png in Resources */,
+				61C0E99915AEAF7D00501864 /* backgroundWave.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1548,6 +1571,8 @@
 				618D00C615AE9A09007CCE11 /* RootViewController.mm in Sources */,
 				618D00CA15AE9A09007CCE11 /* AppDelegate.cpp in Sources */,
 				618D00CD15AE9A09007CCE11 /* HelloWorldScene.cpp in Sources */,
+				61C0E99315AEA71600501864 /* BackgroundWave.cpp in Sources */,
+				61C0E99515AEADB200501864 /* FirstStage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1679,7 @@
 				618D00D415AE9A09007CCE11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		618DFE7715AE9A06007CCE11 /* Build configuration list for PBXProject "BuoBuo" */ = {
 			isa = XCConfigurationList;
