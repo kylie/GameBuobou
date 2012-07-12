@@ -11,7 +11,6 @@
 
 // When you import this file, you import all the cocos2d classes
 #include "cocos2d.h"
-#include "Box2D.h"
 
 class MainScene : public cocos2d::CCLayer {
 public:
