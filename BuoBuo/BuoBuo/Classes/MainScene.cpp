@@ -18,8 +18,8 @@ using namespace CocosDenshion;
 
 MainScene::MainScene()
 {
-	setIsTouchEnabled( true );
-	setIsAccelerometerEnabled( true );
+//	setIsTouchEnabled( true );
+//	setIsAccelerometerEnabled( true );
     
 	CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
 	//UXLOG(L"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
