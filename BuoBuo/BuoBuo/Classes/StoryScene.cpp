@@ -18,6 +18,9 @@ using namespace CocosDenshion;
 
 StoryScene::StoryScene()
 {
+    
+    setIsTouchEnabled(true);
+    setIsAccelerometerEnabled(true);
 	// add accelerometer delegate
 	cocos2d::CCAccelerometer *accelerometer = cocos2d::CCAccelerometer::sharedAccelerometer();
 	accelerometer->setDelegate(this);
@@ -37,10 +40,11 @@ StoryScene::StoryScene()
 	parallaxNode->runAction(moveAction);
 	
 	// create main character
-	CCSprite *buobuo = CCSprite::spriteWithFile("buobuo_R.png");
+	buobuo = CCSprite::spriteWithFile("buobuo_R.png");
 	buobuo->setPosition(CCPoint(150, winsize.height / 2));
 	addChild(buobuo);
-	
+//	buobuo->retain();
+    
 	// menu item
     CCMenuItemImage* item = CCMenuItemImage::itemFromNormalImage("back.png", "back.png", this, menu_selector(StoryScene::menuCallbackMain));
     CCMenu* menu = CCMenu::menuWithItem(item);
@@ -55,6 +59,8 @@ StoryScene::StoryScene()
 	
 	// create physics world
 	createPhysicsWorld();
+    
+    
 	
 	// add physics body to sprite
 	addPhysicsBodyToSprite(buobuo);
@@ -189,6 +195,10 @@ void StoryScene::didAccelerate(cocos2d::CCAcceleration *pAcceleration)
 	cout<<"Acceleration Y : "<<pAcceleration->y * 10.f<<endl;
 	cout<<"Acceleration Z : "<<pAcceleration->z * 10.f<<endl;
 	
+    if ( buobuo == NULL ) {
+        return;
+    }
+    
 	b2Vec2 gravity(0.f, pAcceleration->y * 5.f);
 	world->SetGravity(gravity);
 }

@@ -13,7 +13,11 @@
 #include "cocos2d.h"
 #include "Box2D.h"
 
+USING_NS_CC;
+
 class StoryScene : public cocos2d::CCLayer {
+protected:
+    CCSprite* buobuo;
 public:
     ~StoryScene();
     StoryScene();
