@@ -24,9 +24,8 @@ StoryScene::StoryScene()
 {
 	setIsTouchEnabled(true);
     setIsAccelerometerEnabled(true);
-	
-	min = "02";
-	sec = "00";
+
+	timeout = 120; // play time : 2 min
 	
 	// create physics world
 	createPhysicsWorld();
@@ -75,11 +74,34 @@ bool StoryScene::createBackgroundObjects()
 {
 	CCSize winsize = CCDirector::sharedDirector()->getWinSize();
 	
-	// background wave
-	CCSprite *backgroundWave = CCSprite::spriteWithFile("backgroundWave.png");
+	CCSprite *sky = CCSprite::spriteWithFile("sky.png");
+	sky->setPosition(CCPoint(winsize.width / 2, winsize.height - (sky->getTextureRect().size.height / 2)));
+	addChild(sky, 0);
+	
+	CCSprite *sea = CCSprite::spriteWithFile("sea.png");
+	sea->setPosition(CCPoint(winsize.width / 2, (sea->getTextureRect().size.height / 2)));
+	addChild(sea, 0);
+	
+	// backgroud cloud
+	CCSprite *cloud = CCSprite::spriteWithFile("cloud1.png");
+	CCSprite *wave1 = CCSprite::spriteWithFile("wave1.png");
+//	CCSprite *wave2 = CCSprite::spriteWithFile("wave2.png");
+
 	CCParallaxNode *parallaxNode = CCParallaxNode::node();
-	parallaxNode->addChild(backgroundWave, 0, ccp(1.0f, 0), CCPoint(winsize.width / 2, winsize.height / 2));
+	parallaxNode->addChild(cloud, 0, ccp(0.2f, 0), CCPoint(winsize.width / 2, winsize.height - (cloud->getTextureRect().size.height / 2)));
+	parallaxNode->addChild(wave1, 0, ccp(5.f, 0), CCPoint(winsize.width / 2, (wave1->getTextureRect().size.height / 2)));
+//	parallaxNode->addChild(wave2, 0, ccp(3.f, 0), CCPoint((winsize.width / 2) + winsize.width, 
+//															(wave2->getTextureRect().size.height / 2)));
 	addChild(parallaxNode, 0, BG_WAVE);
+	
+	// background wave
+//	CCSprite *wave1 = CCSprite::spriteWithFile("wave1.png");
+//	CCSprite *wave2 = CCSprite::spriteWithFile("wave2.png");
+//	CCParallaxNode *parallaxNode = CCParallaxNode::node();
+//	parallaxNode->addChild(wave1, 0, ccp(speed, 0), CCPoint(winsize.width / 2, (wave1->getTextureRect().size.height / 2)));
+//	parallaxNode->addChild(wave2, 0, ccp(speed, 0), CCPoint((winsize.width / 2) + winsize.width, 
+//														   (wave2->getTextureRect().size.height / 2)));
+//	addChild(parallaxNode, 0, BG_WAVE);
 	
 	return true;
 }
@@ -110,11 +132,7 @@ bool StoryScene::createInterfaceObjects()
     addChild(menu);
 	
 	// time label
-	string timeout = min;
-	timeout.insert(timeout.length(), ":");
-	timeout.insert(timeout.length(), sec);
-	
-    CCLabelTTF *timeLabel = CCLabelTTF::labelWithString(timeout.c_str(), "arial", 20);
+    CCLabelTTF *timeLabel = CCLabelTTF::labelWithString("02:00", "arial", 20);
 	timeLabel->setColor( ccc3(255, 255, 255) );
 	timeLabel->setPosition( CCPointMake( winsize.width / 2, winsize.height - 25) );
 	addChild(timeLabel, 0, UI_TIMEOUT);
@@ -221,9 +239,9 @@ bool StoryScene::addPhysicsBodyToSprite(cocos2d::CCSprite *sprite)
 	
 	b2FixtureDef nodeShapeDef;
 	nodeShapeDef.shape = &polygonShape;
-	nodeShapeDef.density = 3.0f;
+	nodeShapeDef.density = 0.0f;
 	nodeShapeDef.friction = 1.0f;
-	nodeShapeDef.restitution = 0.3f;
+	nodeShapeDef.restitution = 0.0f;
 	
 	b2Body *body = world->CreateBody(&nodeBodyDef);
 	body->CreateFixture(&nodeShapeDef);
@@ -233,35 +251,24 @@ bool StoryScene::addPhysicsBodyToSprite(cocos2d::CCSprite *sprite)
 
 void StoryScene::startTimeoutAnimation(ccTime dt)
 {
-	cout<<dt<<endl;
+	// check time limit
+	if (timeout <= 0) {
+		isGameOver = true;
+		return;
+	}
+	
+	cout<<timeout--<<endl;
 	stringstream ss (stringstream::in | stringstream::out);
-	ss.str("");
-	
-	// float to string
-	if (atoi(sec) == 0) {
-		int minTime = atoi(min);
-		minTime--;
-		
-		ss << "0" << minTime;
-		min = ss.str().c_str();
-		sec = "59";
-	}
-	else {	
-		int secTime = atoi(sec);
-		secTime--;
 
-		if (secTime < 10) ss << "0" << secTime;
-		else ss << secTime;
-		sec = ss.str().c_str();
-	}
-
+	int minTime = timeout / 60;
+	ss << "0" << minTime;
 	
-	string timeout = min;
-	timeout.insert(timeout.length(), ":");
-	timeout.insert(timeout.length(), sec);
+	int secTime = timeout - (minTime * 60);
+	if (secTime < 10) ss << ":" << "0" << secTime;
+	else ss << ":" << secTime;
 	
 	CCLabelTTF *label = (CCLabelTTF *)this->getChildByTag(UI_TIMEOUT);
-	label->setString(timeout.c_str());
+	label->setString(ss.str().c_str());
 }
 
 void StoryScene::startBackgroundAnimation()
@@ -269,12 +276,18 @@ void StoryScene::startBackgroundAnimation()
 	CCSize winsize = CCDirector::sharedDirector()->getWinSize();
 	
 	// animate background
-	CCNode *parallaxNode = this->getChildByTag(BG_WAVE);
-	float duration = 10.f;
-	float xRatio = 1.f;
+	CCParallaxNode *parallaxNode = (CCParallaxNode *) this->getChildByTag(BG_WAVE);
+	float duration = 5.f;
 	
-	CCAction *moveAction = CCMoveBy::actionWithDuration(duration, ccp( -1 * winsize.width / xRatio, 0));
-	parallaxNode->runAction(moveAction);
+	if (parallaxNode->getPosition().x <= -(winsize.width * 0.5)) {
+		parallaxNode->setPosition(winsize.width / 2 + winsize.width, parallaxNode->getPosition().y);
+	}
+	
+	CCMoveBy *moveAction = CCMoveBy::actionWithDuration(duration, ccp( -1 * winsize.width, 0));
+	CCFiniteTimeAction *callback = CCCallFuncND::actionWithTarget(this, 
+																  callfuncND_selector(StoryScene::startBackgroundAnimation), NULL);
+	CCFiniteTimeAction *seq = CCSequence::actions(moveAction, callback, NULL);
+	parallaxNode->runAction(seq);
 }
 
 void StoryScene::menuCallbackMain(CCObject* sender)
@@ -312,6 +325,6 @@ void StoryScene::didAccelerate(cocos2d::CCAcceleration *pAcceleration)
 	cout<<"Acceleration Y : "<<pAcceleration->y * 10.f<<endl;
 	cout<<"Acceleration Z : "<<pAcceleration->z * 10.f<<endl;
     
-	b2Vec2 gravity(0.f, pAcceleration->y * 5.f);
+	b2Vec2 gravity(0.f, pAcceleration->y * 30.f);
 	world->SetGravity(gravity);
 }

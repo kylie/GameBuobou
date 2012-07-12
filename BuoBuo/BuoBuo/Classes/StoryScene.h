@@ -21,8 +21,8 @@ public:
     StoryScene();
 	
 	b2World *world;
-	const char *min;
-	const char *sec;
+	int timeout;
+	bool isGameOver;
     
     // returns a Scene that contains the MainScene as the only child
     static cocos2d::CCScene* scene();
