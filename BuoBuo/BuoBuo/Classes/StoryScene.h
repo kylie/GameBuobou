@@ -16,6 +16,8 @@
 USING_NS_CC;
 
 class StoryScene : public cocos2d::CCLayer {
+	CCSprite* buobuo;
+	CCSprite* enemy1;
     CCSprite* enemy2;
     CCSprite* enemy3;
     
@@ -25,7 +27,6 @@ public:
 
 	bool isGameOver;
 	int life;
-
     int time;
     
 	b2World *world;
@@ -43,13 +44,14 @@ public:
 	
 	bool createPhysicsWorld();
 	bool createBackgroundObjects();
-	bool createChracterObjects();
+	bool createCharacterObjects();
 	bool createInterfaceObjects();
-	bool createEnemyObjects();
+//	bool createEnemyObjects();
 	
 	void startBackgroundAnimation();
 	void startEnemyAnimation();
 	void startTimeoutAnimation(ccTime dt);
+	void startEndingScene();
 	bool isCollision(CCSprite *main, CCSprite *enemy);
 
 	bool addPhysicsBodyToSprite(cocos2d::CCSprite *sprite);

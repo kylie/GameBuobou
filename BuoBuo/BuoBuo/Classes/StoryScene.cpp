@@ -30,13 +30,18 @@ enum {
 #define BG_SKY 200
 #define UI_TIMEOUT 201
 #define TAG_ENEMY 202
+#define TAG_LIGHTHOUSE 203
+
+#define BG_Z_ORDER 0
+#define CHARACTER_Z_ORDER 1
+#define UI_Z_ORDER 2
 
 StoryScene::StoryScene()
 {
     setIsTouchEnabled(true);
     setIsAccelerometerEnabled(true);
 
-	timeout = 120; // play time : 2 min
+	timeout = 10; // play time : 2 min
 	life = 3; // life : 3
 	enemyArr = CCArray::arrayWithCapacity(100);
 	bgArr = CCArray::arrayWithCapacity(0);
@@ -46,9 +51,9 @@ StoryScene::StoryScene()
 	
 	// create object stuff
 	createBackgroundObjects();
-	createChracterObjects();
+	createCharacterObjects();
 	createInterfaceObjects();
-	createEnemyObjects();
+//	createEnemyObjects();
 }
 
 StoryScene::~StoryScene()
@@ -91,11 +96,11 @@ bool StoryScene::createBackgroundObjects()
 	
 	CCSprite *sky = CCSprite::spriteWithFile("sky.png");
 	sky->setPosition(CCPoint(winsize.width / 2, winsize.height - (sky->getTextureRect().size.height / 2)));
-	addChild(sky, 0);
+	addChild(sky, BG_Z_ORDER);
 	
 	CCSprite *sea = CCSprite::spriteWithFile("sea.png");
 	sea->setPosition(CCPoint(winsize.width / 2, (sea->getTextureRect().size.height / 2)));
-	addChild(sea, 0);
+	addChild(sea, BG_Z_ORDER);
 	
 	// background
 	CCParallaxNode *parallaxNode = CCParallaxNode::node();
@@ -105,7 +110,7 @@ bool StoryScene::createBackgroundObjects()
 		ss << "cloud" << i + 1 <<".png";
 		CCSprite *cloud = CCSprite::spriteWithFile(ss.str().c_str());
 		cloud->setAnchorPoint(CCPointZero);
-		parallaxNode->addChild(cloud, 0, ccp(0.05f, 0), CCPoint((i * cloud->getContentSize().width) + 100, 
+		parallaxNode->addChild(cloud, BG_Z_ORDER, ccp(0.05f, 0), CCPoint((i * cloud->getContentSize().width) + 100, 
 															   sea->getContentSize().height - 20));
 	}
 	
@@ -114,23 +119,28 @@ bool StoryScene::createBackgroundObjects()
 		ss << "wave" << i + 1 <<".png";
 		CCSprite *wave = CCSprite::spriteWithFile(ss.str().c_str());
 		wave->setAnchorPoint(CCPointZero);
-		parallaxNode->addChild(wave, 0, ccp(1.0f, 0), CCPoint(i * wave->getContentSize().width, 0));
+		parallaxNode->addChild(wave, BG_Z_ORDER, ccp(1.0f, 0), CCPoint(i * wave->getContentSize().width, 0));
 	}
 	
-	addChild(parallaxNode, 0, BG_WAVE1);
+	addChild(parallaxNode, BG_Z_ORDER, BG_WAVE1);
 	
 	return true;
 }
 
-bool StoryScene::createChracterObjects()
+bool StoryScene::createCharacterObjects()
 {
 	CCSize winsize = CCDirector::sharedDirector()->getWinSize();
 	
 	// create main character
-	buobuo = CCSprite::spriteWithFile("buobuo_R.png");
+	CCSprite *buobuo = CCSprite::spriteWithFile("buobuo1.png");
 	buobuo->setPosition(CCPoint(BUOBUO_POSITION_X, winsize.height / 2));
     buobuo->setTag(kTagSpriteBuo);
-	addChild(buobuo);
+	addChild(buobuo, CHARACTER_Z_ORDER);
+	
+	// create lighthouse
+	CCSprite *lighthouse = CCSprite::spriteWithFile("lighthouse1.png");
+	lighthouse->setPosition(CCPoint(winsize.width + 800, winsize.height / 2));
+	addChild(lighthouse, CHARACTER_Z_ORDER, TAG_LIGHTHOUSE);
 	
 	// add physics body to sprite
 	addPhysicsBodyToSprite(buobuo);
@@ -150,9 +160,9 @@ bool StoryScene::createInterfaceObjects()
 	
 	// time label
     CCLabelTTF *timeLabel = CCLabelTTF::labelWithString("02:00", "arial", 20);
-	timeLabel->setColor( ccc3(255, 255, 255) );
+	timeLabel->setColor( ccc3(0, 0, 100) );
 	timeLabel->setPosition( CCPointMake( winsize.width / 2, winsize.height - 25) );
-	addChild(timeLabel, 0, UI_TIMEOUT);
+	addChild(timeLabel, UI_Z_ORDER, UI_TIMEOUT);
 	
 	return true;
 }
@@ -277,6 +287,10 @@ void StoryScene::startTimeoutAnimation(ccTime dt)
 		return;
 	}
 	
+	if (timeout == 10) {
+		startEndingScene();
+	}
+	
 	cout<<timeout--<<endl;
 	stringstream ss (stringstream::in | stringstream::out);
 
@@ -293,24 +307,14 @@ void StoryScene::startTimeoutAnimation(ccTime dt)
 
 void StoryScene::startBackgroundAnimation()
 {	
-	if (isGameOver) return;
+	if (isGameOver) {
+		return;
+	}
 	
 	CCSize winsize = CCDirector::sharedDirector()->getWinSize();
 
 	CCParallaxNode *parallaxNode = (CCParallaxNode *)this->getChildByTag(BG_WAVE1);
-	float duration = 8.f;
-	
-//	if (parallaxNode->getPosition().x <= -winsize.width) {
-//		removeChild(parallaxNode, true);
-//		addChild((CCParallaxNode *)bgArr->objectAtIndex(2), 0, BG_WAVE1);
-////		CCSprite *wave = (CCSprite*)parallaxNode->getChildren()->objectAtIndex(0);
-////		wave->retain();
-////		parallaxNode->removeChild(wave, false);
-////		parallaxNode->addChild(wave, 0, ccp(1.0, 0), CCPoint(winsize.width, 0));
-//		
-////		parallaxNode->setPosition(CCPoint(winsize.width, 0));
-////		parallaxNode = (CCParallaxNode *)this->getChildByTag(BG_WAVE2);
-//	}
+	float duration = 10.f;
 	
 	CCMoveBy *moveAction = CCMoveBy::actionWithDuration(duration, ccp( -1 * winsize.width, 0));
 	CCFiniteTimeAction *callback = CCCallFuncND::actionWithTarget(this, 
@@ -356,7 +360,7 @@ void StoryScene::tick(cocos2d::ccTime dt)
                         this->gameOver();
                 }
             }
-            else if (myActor->getTag() == kTagSpriteEnemy1 || myActor->getTag() == kTagSpriteEnemy2 || myActor->getTag() == kTagSpriteEnemy3)
+            else if (myActor->getTag() == kTagSpriteEnemy1 || myActor->getTag() == kTagSpriteEnemy2 || myActor->getTag() == kTagSpriteEnemy3) {
 //                    enemy1->release();
 //                    world->DestroyBody(b);
 //                    world->DestroyBody(b);
@@ -368,11 +372,9 @@ void StoryScene::tick(cocos2d::ccTime dt)
        
 //			myActor->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
 		}	
-	}
     
 //    if(time == 100 || time == 500 || time == 900)
-    if (time >= 100 && time%300 == 0)
-    {
+    if (time >= 100 && time%300 == 0) {
         int i = (CCRANDOM_0_1()*2 + 1);
         this->addEnemy(i);
     }
@@ -442,7 +444,7 @@ void StoryScene::buobuoDied()
 //                CCFiniteTimeAction* sequence = CCSequence::actions(action1, action2, action1, action2);
 //                myActor->runAction(sequence);
                 CCSize winsize = CCDirector::sharedDirector()->getWinSize();
-                buobuo = CCSprite::spriteWithFile("buobuo_R.png");
+                buobuo = CCSprite::spriteWithFile("buobuo1.png");
                 buobuo->setPosition(CCPoint(BUOBUO_POSITION_X, winsize.height / 2));
                 buobuo->setTag(kTagSpriteBuo);
                 addPhysicsBodyToSprite(buobuo);
@@ -570,4 +572,25 @@ void StoryScene::addEnemy(int n)
 
 //    bDef.type = b2_kinematicBody;
     cout<<"Enemy++++++++++++++++++++++++++++" << n << " added"<<endl;
+}
+
+void StoryScene::startEndingScene()
+{
+		CCSprite *lightHouse = (CCSprite *)getChildByTag(TAG_LIGHTHOUSE);
+	if (isGameOver) {
+		CCSprite *lightHouse2 = CCSprite::spriteWithFile("lighthouse2.png");
+		lightHouse2->setAnchorPoint(CCPointZero);
+		lightHouse2->setPosition(CCPointZero);
+		lightHouse->addChild(lightHouse2);
+		return;
+	}
+	
+	setIsAccelerometerEnabled(false);
+	
+	CCSize winsize = CCDirector::sharedDirector()->getWinSize();
+	float duration = 10.f;
+	CCMoveBy *moveAction = CCMoveBy::actionWithDuration(duration, ccp(( -1 * winsize.width), 0));
+	CCFiniteTimeAction *startAction = CCCallFuncND::actionWithTarget(this, callfuncND_selector(StoryScene::startEndingScene), NULL);
+	CCFiniteTimeAction *seq = CCSequence::actions(moveAction, startAction, NULL);
+	lightHouse->runAction(seq);
 }
