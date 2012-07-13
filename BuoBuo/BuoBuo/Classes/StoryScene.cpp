@@ -453,10 +453,18 @@ void StoryScene::destroyEnemy(CCSprite *enemy)
 			CCSprite *myActor = (CCSprite *)b->GetUserData();
             if (myActor->getTag() == kTagSpriteEnemy1)
             {
-//                world->DestroyBody(b);
-//                this->scene()->removeChild(enemy1, true);
-                
-                
+                world->DestroyBody(b);
+                this->scene()->removeChild(enemy1, true);
+            }
+            else if (myActor->getTag() == kTagSpriteEnemy2)
+            {
+                world->DestroyBody(b);
+                this->scene()->removeChild(enemy2, true);
+            }
+            else if (myActor->getTag() == kTagSpriteEnemy3)
+            {
+                world->DestroyBody(b);
+                this->scene()->removeChild(enemy3, true);
             }
         }
     }
@@ -476,6 +484,8 @@ void StoryScene::addEnemy(int n)
     
     if (n == 1)
     {
+        if (enemy1 != NULL)
+            this->destroyEnemy(enemy1);
         enemy1 = CCSprite::spriteWithFile("enemy1.png");
         enemy1->setPosition(CCPoint(500, py));
         enemy1->setTag(kTagSpriteEnemy1);
@@ -498,6 +508,8 @@ void StoryScene::addEnemy(int n)
     }
     if (n == 2)
     {
+        if (enemy2 != NULL)
+            this->destroyEnemy(enemy2);
         enemy2 = CCSprite::spriteWithFile("enemy2.png");
         enemy2->setPosition(CCPoint(500, py));
         enemy2->setTag(kTagSpriteEnemy2);
@@ -520,6 +532,8 @@ void StoryScene::addEnemy(int n)
     }
     if (n == 3)
     {
+        if (enemy3 != NULL)
+            this->destroyEnemy(enemy3);
         enemy3 = CCSprite::spriteWithFile("enemy3.png");
         enemy3->setPosition(CCPoint(500, py));
         enemy3->setTag(kTagSpriteEnemy3);
