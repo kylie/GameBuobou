@@ -361,7 +361,8 @@ void StoryScene::tick(cocos2d::ccTime dt)
 		}	
 	}
     
-    if(time == 100 || time == 500 || time == 900)
+//    if(time == 100 || time == 500 || time == 900)
+    if (time >= 100 && time%300 == 0)
     {
         int i = (CCRANDOM_0_1()*2 + 1);
         this->addEnemy(i);
