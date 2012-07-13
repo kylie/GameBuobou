@@ -26,17 +26,25 @@ MainScene::MainScene()
     sprite->setPosition(CCPoint(round(screenSize.width/2), round(screenSize.height/2)));
     addChild(sprite);
     
+    CCSprite *title = CCSprite::spriteWithFile("title.png");
+    title->setPosition(CCPoint(round(screenSize.width/2)+10, round(screenSize.height+180)));
+    addChild(title);
+    CCMoveTo *move = CCMoveTo::actionWithDuration(3, CCPoint(round(screenSize.width/2)+10, round(screenSize.height-80)));
+//    title->setPosition(CCPoint(round(screenSize.width/2)+10, round(screenSize.height-80)));
+    title->runAction(move);
+   
+    
     //Set up menu
     //(const char *normalImage, const char *selectedImage, CCObject* target, SEL_MenuHandler selector)
-    CCMenuItemImage* item1 = CCMenuItemImage::itemFromNormalImage("main_menu_story.png", "main_menu_story.png", this, menu_selector(MainScene::menuCallbackStory));
-    CCMenuItemImage* item2 = CCMenuItemImage::itemFromNormalImage("main_menu_play.png", "main_menu_play.png", this, menu_selector(MainScene::menuCallbackPlay) );
+    CCMenuItemImage* item1 = CCMenuItemImage::itemFromNormalImage("main_menu_story.png", "main_menu_story_selected.png", this, menu_selector(MainScene::menuCallbackStory));
+    CCMenuItemImage* item2 = CCMenuItemImage::itemFromNormalImage("main_menu_play.png", "main_menu_play_selected.png", this, menu_selector(MainScene::menuCallbackPlay) );
     
     CCMenu* menu = CCMenu::menuWithItems(item1, item2, NULL);
-    menu->setPosition(ccp(100, 100));
+    menu->setPosition(ccp(150, 30));
     
     addChild(menu);
-    item1->setPosition(ccp(0, 50));
-    item2->setPosition(ccp(0, 0));
+    item1->setPosition(ccp(0, 0));
+    item2->setPosition(ccp(200, 0));
 }
 
 MainScene::~MainScene()
