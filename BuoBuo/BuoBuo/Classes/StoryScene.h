@@ -16,19 +16,18 @@
 USING_NS_CC;
 
 class StoryScene : public cocos2d::CCLayer {
-protected:
-    CCSprite* buobuo;
-    CCSprite* enemy1;
 public:
     ~StoryScene();
     StoryScene();
 
 	bool isGameOver;
-    int interval;
-    int time;
+	int life;
     
 	b2World *world;
 	int timeout;
+	
+	CCArray *enemyArr;
+	CCArray *bgArr;
     
     // returns a Scene that contains the MainScene as the only child
     static cocos2d::CCScene* scene();
@@ -41,9 +40,12 @@ public:
 	bool createBackgroundObjects();
 	bool createChracterObjects();
 	bool createInterfaceObjects();
+	bool createEnemyObjects();
 	
 	void startBackgroundAnimation();
+	void startEnemyAnimation();
 	void startTimeoutAnimation(ccTime dt);
+	bool isCollision(CCSprite *main, CCSprite *enemy);
 
 	bool addPhysicsBodyToSprite(cocos2d::CCSprite *sprite);
     void menuCallbackMain(CCObject* sender);
