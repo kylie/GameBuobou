@@ -19,12 +19,15 @@ class StoryScene : public cocos2d::CCLayer {
 protected:
     CCSprite* buobuo;
     CCSprite* enemy1;
+    CCSprite* enemy2;
+    CCSprite* enemy3;
+    
 public:
     ~StoryScene();
     StoryScene();
 
 	bool isGameOver;
-    int interval;
+
     int time;
     
 	b2World *world;
@@ -51,10 +54,11 @@ public:
 	// CCAccelerometerDelegate method
 	virtual void didAccelerate(cocos2d::CCAcceleration *pAcceleration);
     
+    void addEnemy(int n);
     void destroyEnemy(CCSprite *enemy);
     void gameOver();
     void buobuoDied();
-    void addEnemy();
+    
 	
 	// CCScene delegate
 	virtual void onEnter();

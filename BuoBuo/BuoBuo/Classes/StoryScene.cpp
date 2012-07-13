@@ -120,7 +120,7 @@ bool StoryScene::createChracterObjects()
 	CCSize winsize = CCDirector::sharedDirector()->getWinSize();
 	
 	// create main character
-	CCSprite *buobuo = CCSprite::spriteWithFile("buobuo_R.png");
+	buobuo = CCSprite::spriteWithFile("buobuo_R.png");
 	buobuo->setPosition(CCPoint(BUOBUO_POSITION_X, winsize.height / 2));
     buobuo->setTag(kTagSpriteBuo);
 	addChild(buobuo);
@@ -242,19 +242,21 @@ bool StoryScene::addPhysicsBodyToSprite(cocos2d::CCSprite *sprite)
 	nodeBodyDef.type = b2_dynamicBody;
 	nodeBodyDef.position.Set(sprite->getPosition().x / PTM_RATIO, sprite->getPosition().y / PTM_RATIO);
 	nodeBodyDef.userData = sprite;
-	
+	b2Body *body = world->CreateBody(&nodeBodyDef);
+    
 	b2PolygonShape polygonShape;
 	polygonShape.SetAsBox(sprite->getContentSize().width * sprite->getScale() / 2 / PTM_RATIO, 
 						  sprite->getContentSize().height  * sprite->getScale() / 2 / PTM_RATIO);
 	
 	b2FixtureDef nodeShapeDef;
 	nodeShapeDef.shape = &polygonShape;
-	nodeShapeDef.density = 0.0f;
+	nodeShapeDef.density = 1.0f;
 	nodeShapeDef.friction = 0.3f;
 	nodeShapeDef.restitution = 0.3f;
 	
-	b2Body *body = world->CreateBody(&nodeBodyDef);
+	
 	body->CreateFixture(&nodeShapeDef);
+        
 	
 	return true;
 }
@@ -311,8 +313,9 @@ void StoryScene::tick(cocos2d::ccTime dt)
 {	
 //	cout<<"tick"<<endl;
 	
-    interval = (CCRANDOM_0_1()*10);
+   
     time += 1;
+
      cout<< "time : " << time <<endl;
 	int velocityIterations = 8;
 	int positionIterations = 1;
@@ -336,15 +339,15 @@ void StoryScene::tick(cocos2d::ccTime dt)
                         this->gameOver();
                 }
             }
-            else if (myActor->getTag() == kTagSpriteEnemy1)
+            else if (myActor->getTag() == kTagSpriteEnemy1 || myActor->getTag() == kTagSpriteEnemy2 || myActor->getTag() == kTagSpriteEnemy3)
             {
                 b2Vec2 gravity(-5.f, 0.f);
                 b->SetLinearVelocity(gravity);
                 myActor->setPosition(ccp(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO));
                 if (myActor->getPosition().x <= -(myActor->boundingBox().size.width/2))
                 {
-                    enemy1->release();
-                    world->DestroyBody(b);
+//                    enemy1->release();
+//                    world->DestroyBody(b);
                     
 //                    this->destroyEnemy(enemy1);
 //                    world->DestroyBody(b);
@@ -359,7 +362,10 @@ void StoryScene::tick(cocos2d::ccTime dt)
 	}
     
     if(time == 100 || time == 500 || time == 900)
-        this->addEnemy();
+    {
+        int i = (CCRANDOM_0_1()*2 + 1);
+        this->addEnemy(i);
+    }
 }
 
 void StoryScene::didAccelerate(cocos2d::CCAcceleration *pAcceleration)
@@ -415,6 +421,7 @@ void StoryScene::buobuoDied()
                 
 
 //                b2Vec2 position(100 * PTM_RATIO, 0);
+                
 //                b->SetTransform(position, 0);
 //                myActor->setPosition(ccp(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO));
 //                CCFiniteTimeAction* action1 = CCFadeOut::actionWithDuration(0.5);
@@ -427,6 +434,10 @@ void StoryScene::buobuoDied()
                 buobuo->setTag(kTagSpriteBuo);
                 addPhysicsBodyToSprite(buobuo);
                 addChild(buobuo);
+
+                
+                // add physics body to sprite
+                addPhysicsBodyToSprite(buobuo);
                 
                 
             }
@@ -450,49 +461,86 @@ void StoryScene::destroyEnemy(CCSprite *enemy)
     }
 }
 
-void StoryScene::addEnemy()
+void StoryScene::addEnemy(int n)
 {
     CCPoint p;
     
     CCSize winsize = CCDirector::sharedDirector()->getWinSize();
 	
-    
-//    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
-//		if (b->GetUserData() != NULL) {
-//			CCSprite *myActor = (CCSprite *)b->GetUserData();
-//            if (myActor->getTag() == kTagSpriteEnemy1)
-//            {
-//                world->DestroyBody(b);
-//                enemy1->release();
-//            }
-//        }
-//    }
 
+    float py = (CCRANDOM_0_1() * (winsize.height-50));
     
-    enemy1 = CCSprite::spriteWithFile("enemy1.png");
-	enemy1->setPosition(CCPoint(500, winsize.height / 3));
-    enemy1->setTag(kTagSpriteEnemy1);
-    addChild(enemy1);
-
-//    bDef.type = b2_kinematicBody;
     b2BodyDef nodeBodyDef;
 	nodeBodyDef.type = b2_dynamicBody;
-	nodeBodyDef.position.Set(enemy1->getPosition().x / PTM_RATIO, enemy1->getPosition().y / PTM_RATIO);
-	nodeBodyDef.userData = enemy1;
-	
-	b2PolygonShape polygonShape;
-	polygonShape.SetAsBox(enemy1->getContentSize().width * enemy1->getScale() / 2 / PTM_RATIO, 
-						  enemy1->getContentSize().height  * enemy1->getScale() / 2 / PTM_RATIO);
-	
-	b2FixtureDef nodeShapeDef;
-	nodeShapeDef.shape = &polygonShape;
-	nodeShapeDef.density = 5.0f;
-	nodeShapeDef.friction = 0.3f;
-	nodeShapeDef.restitution = 0.0f;
-
-    b2Body *body = world->CreateBody(&nodeBodyDef);
-	body->CreateFixture(&nodeShapeDef);
-   
     
-    cout<<"Enemy++++++++++++++++++++++++++++"<<endl;
+    if (n == 1)
+    {
+        enemy1 = CCSprite::spriteWithFile("enemy1.png");
+        enemy1->setPosition(CCPoint(500, py));
+        enemy1->setTag(kTagSpriteEnemy1);
+        addChild(enemy1);        
+        
+        nodeBodyDef.position.Set(enemy1->getPosition().x / PTM_RATIO, enemy1->getPosition().y / PTM_RATIO);
+        nodeBodyDef.userData = enemy1;
+        b2Body *body = world->CreateBody(&nodeBodyDef);
+        
+        b2PolygonShape polygonShape;
+        polygonShape.SetAsBox(enemy1->getContentSize().width * enemy1->getScale() / 2 / PTM_RATIO, 
+                              enemy1->getContentSize().height  * enemy1->getScale() / 2 / PTM_RATIO);
+        b2FixtureDef nodeShapeDef;
+        nodeShapeDef.shape = &polygonShape;
+        nodeShapeDef.density = 5.0f;
+        nodeShapeDef.friction = 0.3f;
+        nodeShapeDef.restitution = 0.0f;
+        
+        body->CreateFixture(&nodeShapeDef);
+    }
+    if (n == 2)
+    {
+        enemy2 = CCSprite::spriteWithFile("enemy2.png");
+        enemy2->setPosition(CCPoint(500, py));
+        enemy2->setTag(kTagSpriteEnemy2);
+        addChild(enemy2);     
+        
+        nodeBodyDef.position.Set(enemy2->getPosition().x / PTM_RATIO, enemy2->getPosition().y / PTM_RATIO);
+        nodeBodyDef.userData = enemy2;
+        b2Body *body = world->CreateBody(&nodeBodyDef);
+        
+        b2PolygonShape polygonShape;
+        polygonShape.SetAsBox(enemy1->getContentSize().width * enemy2->getScale() / 2 / PTM_RATIO, 
+                              enemy1->getContentSize().height  * enemy2->getScale() / 2 / PTM_RATIO);
+        b2FixtureDef nodeShapeDef;
+        nodeShapeDef.shape = &polygonShape;
+        nodeShapeDef.density = 5.0f;
+        nodeShapeDef.friction = 0.3f;
+        nodeShapeDef.restitution = 0.0f;
+        
+        body->CreateFixture(&nodeShapeDef);
+    }
+    if (n == 3)
+    {
+        enemy3 = CCSprite::spriteWithFile("enemy3.png");
+        enemy3->setPosition(CCPoint(500, py));
+        enemy3->setTag(kTagSpriteEnemy3);
+        addChild(enemy3);     
+        
+        nodeBodyDef.position.Set(enemy3->getPosition().x / PTM_RATIO, enemy3->getPosition().y / PTM_RATIO);
+        nodeBodyDef.userData = enemy3;
+        b2Body *body = world->CreateBody(&nodeBodyDef);
+        
+        b2PolygonShape polygonShape;
+        polygonShape.SetAsBox(enemy3->getContentSize().width * enemy3->getScale() / 2 / PTM_RATIO, 
+                              enemy3->getContentSize().height  * enemy3->getScale() / 2 / PTM_RATIO);
+        b2FixtureDef nodeShapeDef;
+        nodeShapeDef.shape = &polygonShape;
+        nodeShapeDef.density = 5.0f;
+        nodeShapeDef.friction = 0.3f;
+        nodeShapeDef.restitution = 0.0f;
+        
+        body->CreateFixture(&nodeShapeDef);
+    }
+    
+
+//    bDef.type = b2_kinematicBody;
+    cout<<"Enemy++++++++++++++++++++++++++++" << n << " added"<<endl;
 }

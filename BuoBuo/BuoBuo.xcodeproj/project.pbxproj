@@ -206,8 +206,12 @@
 		61C0E9BB15AEC7C400501864 /* buobuo_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C0E9BA15AEC7C400501864 /* buobuo_R.png */; };
 		F4252D8C15AEA22D0001E348 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4252D8A15AEA2290001E348 /* MainScene.cpp */; };
 		F4252D8D15AEA2300001E348 /* StoryScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4252D8815AEA2240001E348 /* StoryScene.cpp */; };
-		F49439D315AEF6B100BA18F4 /* enemy1.png in Resources */ = {isa = PBXBuildFile; fileRef = F49439D115AEF6B100BA18F4 /* enemy1.png */; };
 		F49439D415AEF6B100BA18F4 /* enemy1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F49439D215AEF6B100BA18F4 /* enemy1@2x.png */; };
+		F49439E815AFED0600BA18F4 /* enemy2.png in Resources */ = {isa = PBXBuildFile; fileRef = F49439E615AFED0600BA18F4 /* enemy2.png */; };
+		F49439E915AFED0600BA18F4 /* enemy3.png in Resources */ = {isa = PBXBuildFile; fileRef = F49439E715AFED0600BA18F4 /* enemy3.png */; };
+		F49439EC15AFEF3E00BA18F4 /* enemy1.png in Resources */ = {isa = PBXBuildFile; fileRef = F49439EB15AFEF3E00BA18F4 /* enemy1.png */; };
+		F49439EE15AFF2C100BA18F4 /* enemy2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F49439ED15AFF2C100BA18F4 /* enemy2@2x.png */; };
+		F49439F015AFF37C00BA18F4 /* enemy3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F49439EF15AFF37C00BA18F4 /* enemy3@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -603,8 +607,12 @@
 		F4252D8915AEA2240001E348 /* StoryScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StoryScene.h; path = Classes/StoryScene.h; sourceTree = "<group>"; };
 		F4252D8A15AEA2290001E348 /* MainScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = Classes/MainScene.cpp; sourceTree = "<group>"; };
 		F4252D8B15AEA2290001E348 /* MainScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = Classes/MainScene.h; sourceTree = "<group>"; };
-		F49439D115AEF6B100BA18F4 /* enemy1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy1.png; sourceTree = "<group>"; };
 		F49439D215AEF6B100BA18F4 /* enemy1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy1@2x.png"; sourceTree = "<group>"; };
+		F49439E615AFED0600BA18F4 /* enemy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy2.png; sourceTree = "<group>"; };
+		F49439E715AFED0600BA18F4 /* enemy3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy3.png; sourceTree = "<group>"; };
+		F49439EB15AFEF3E00BA18F4 /* enemy1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy1.png; sourceTree = "<group>"; };
+		F49439ED15AFF2C100BA18F4 /* enemy2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy2@2x.png"; sourceTree = "<group>"; };
+		F49439EF15AFF37C00BA18F4 /* enemy3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy3@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1369,7 +1377,11 @@
 		61C0E99715AEAF7D00501864 /* GameResources */ = {
 			isa = PBXGroup;
 			children = (
-				F49439D115AEF6B100BA18F4 /* enemy1.png */,
+				F49439ED15AFF2C100BA18F4 /* enemy2@2x.png */,
+				F49439E615AFED0600BA18F4 /* enemy2.png */,
+				F49439EF15AFF37C00BA18F4 /* enemy3@2x.png */,
+				F49439E715AFED0600BA18F4 /* enemy3.png */,
+				F49439EB15AFEF3E00BA18F4 /* enemy1.png */,
 				F49439D215AEF6B100BA18F4 /* enemy1@2x.png */,
 				61B76F7815AF28E1002E0F3B /* wave1.png */,
 				61B76F7915AF28E1002E0F3B /* wave2.png */,
@@ -1492,7 +1504,6 @@
 				61C0E9B715AEBFE500501864 /* buobuo_R@2x.png in Resources */,
 				61C0E9B915AEC72800501864 /* backgroundWave.png in Resources */,
 				61C0E9BB15AEC7C400501864 /* buobuo_R.png in Resources */,
-				F49439D315AEF6B100BA18F4 /* enemy1.png in Resources */,
 				F49439D415AEF6B100BA18F4 /* enemy1@2x.png in Resources */,
 				61A706FD15AEF30600DF4F75 /* arial.ttf in Resources */,
 				61B76F7115AF252C002E0F3B /* cloud1.png in Resources */,
@@ -1503,6 +1514,11 @@
 				61B76F7615AF252C002E0F3B /* wave.png in Resources */,
 				61B76F7A15AF28E1002E0F3B /* wave1.png in Resources */,
 				61B76F7B15AF28E1002E0F3B /* wave2.png in Resources */,
+				F49439E815AFED0600BA18F4 /* enemy2.png in Resources */,
+				F49439E915AFED0600BA18F4 /* enemy3.png in Resources */,
+				F49439EC15AFEF3E00BA18F4 /* enemy1.png in Resources */,
+				F49439EE15AFF2C100BA18F4 /* enemy2@2x.png in Resources */,
+				F49439F015AFF37C00BA18F4 /* enemy3@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
